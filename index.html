@@ -782,7 +782,8 @@
 						// with this happening, we cannot rely on the value to validate the regex, we need to assume this to be wrong
 						var inputValidity = iElement.prop("validity");
                         // var regex = new RegExp('^[0-9]+$');
-                        var isGoodValue = regex.test(newValue);
+                        var isGoodValue = regex.test(newValue) && (newValue > 0);
+                    
 						if (newValue === "" && iElement.attr("type") === "number" && inputValidity && inputValidity.badInput) {
 							showDebugInfo("Value cannot be verified. Should be invalid. Reverting back to: '" + oldValue + "'");
 							evt.preventDefault();
@@ -1076,8 +1077,8 @@
                         $scope.num_reg_reps = $scope.num_reps - $scope.num_top_reps;
 
                         // What is the total revenue from each group?
-                        total_top_rev = $scope.total_rev * ($scope.percent_top_rev / 100);
-                        total_reg_rev = $scope.total_rev - total_top_rev;
+                        total_top_rev = ( (!$scope.num_top_reps) ? 0 : $scope.total_rev * ($scope.percent_top_rev / 100) );
+                        total_reg_rev = ( (!$scope.num_top_reps) ? $scope.total_rev : ($scope.total_rev - total_top_rev) );
 
                         // How much rev does each individual bring in?
                         rev_per_top_rep = total_top_rev / $scope.num_top_reps;
@@ -1092,6 +1093,7 @@
                         // Calculate the cost of AVTN
                         total_seats = Math.ceil(num_top_w_AVTN + num_reg_w_AVTN);
                         $scope.costOfAVTN = total_seats * $scope.calcCost(total_seats);
+                        $scope.costOfAVTN = ( isNaN($scope.costOfAVTN) ? 0 : $scope.costOfAVTN);
 
                         // How much rev to do we get from each group
                         $scope.fromTopPerformers = rev_per_top_rep * num_top_w_AVTN * 0.06;
@@ -1100,9 +1102,13 @@
                         // $scope.fromRegPerformers = ($scope.total_rev * 0.06 * (($scope.access_reg_reps / 100) * (1 - ($scope.percent_top_rev / 100)))) * 1.2;
 
                         $scope.firstYearGains = $scope.fromTopPerformers + $scope.fromRegPerformers - $scope.costOfAVTN;
+                        $scope.firstYearGains = ( isNaN($scope.firstYearGains) ? 0 : $scope.firstYearGains);
                         $scope.finalGain = ($scope.firstYearGains / $scope.total_rev) * 100;
+                        $scope.finalGain = ( isNaN($scope.finalGain) ? 0 : $scope.finalGain);
+                        
                         $scope.finalGain = $scope.finalGain.toFixed(2);
                         $scope.finalROI = $scope.firstYearGains / $scope.costOfAVTN;
+                        $scope.finalROI = ( isNaN($scope.finalROI) ? 0 : $scope.finalROI);
                         $scope.finalROI = $scope.finalROI.toFixed(1);
                     };
 
