@@ -499,7 +499,7 @@
                             <h2 class='dkGrayText' style='margin-top: 10px;'>ANNUAL SALES REVENUE</h2>
                         </div>
                         <div class='resultDetailField dkGrayText'>
-                            <input class='mdGrayText' style='width: 102px; text-align: right;' ng-model="total_rev" type="number" />
+                            <input class='mdGrayText' style='width: 102px; text-align: right;' ng-model="total_rev" ng-pattern-restrict="^[0-9]+$" step="100000" />
                         </div>
                     </div>
 
@@ -508,7 +508,7 @@
                             <h2 class='dkGrayText' style='margin-top: 10px;'>NUMBER OF SALES REPS</h2>
                         </div>
                         <div class='resultDetailField dkGrayText'>
-                            <input class='mdGrayText' style='width: 102px; text-align: right;' ng-model="num_reps" type="number" />
+                            <input class='mdGrayText' style='width: 102px; text-align: right;' ng-model="num_reps" ng-pattern-restrict="^[0-9]+$" />
                         </div>
                     </div>
                 </div>
@@ -519,41 +519,26 @@
                     <h2 class='dkGrayText'>Studies by the Chally Group have shown that the top 20% of sales reps generate on average 52% of top-line revenue.</h2>
                     <h2 class='dkGrayText'>How does your company compare?</h2>
 
-                    <div class='sliderBox' style='margin-top: 20px; margin-bottom: 0px;'>
-                        <div class='sliderTitleBar'>
-                            <h2 class='dkGrayText sliderTitle'>WHAT PERCENTAGE OF YOUR REPS WOULD YOU CONSIDER TO BE YOUR "TOP PERFORMERS"?</h2>
-                        </div>
-                        <div style='position: relative;'>
-                            <div class='sliderWidgetBox'>
-                                <slider floor='0' ceiling='100' step='1' precision='0' stickiness='0' ng-model='percent_top_reps' ng-mouseup='updateSliders()'></slider>
-                                <div><span class='sliderScales dkGrayText floatLeft'>0%</span><span class='sliderScales dkGrayText floatRight'>100%</span>
-                                </div>
-                            </div>
-                            <div class='sliderNumberBox'>
-                                <input class='sliderField mdGrayText' ng-model="percent_top_reps" type="number" ng-mouseenter="percent_top_reps_hovered = true" ng-mouseleave="percent_top_reps_hovered = false" ng-focus="percent_top_reps_focused = true" ng-blur="percent_top_reps_focused = false" />
-                                <div class='percentField mdGrayText' ng-class='{hidden: percent_top_reps_focused || percent_top_reps_hovered}'>%</div>
+                    <div class='accessBox' style='margin-top: 30px; margin-bottom: 40px;'>
+                        <h2 class='dkGrayText sliderTitle'>WHAT PERCENTAGE OF YOUR REPS WOULD YOU CONSIDER TO BE YOUR "TOP PERFORMERS"? <span class="dkBlueText" style="font-weight:900;">{{percent_top_reps}}%</span></h2>
+                        <div style='margin-right: 10px; margin-top: 10px;'>
+                            <slider floor=0 ceiling=100 step=1 precision=0 stickiness=0 ng-model='percent_top_reps' ng-mouseup='updateSliders()'></slider>
+                            <div><span class='sliderScales dkGrayText floatLeft'>0%</span><span class='sliderScales dkGrayText floatRight'>100%</span>
                             </div>
                         </div>
                     </div>
-
-                    <div class='sliderBox' style='margin-top: 20px; margin-bottom: 0px;'>
-                        <div class='sliderTitleBar'>
-                            <h2 class='dkGrayText sliderTitle'>WHAT PERCENTAGE OF YOUR TOP-LINE REVENUE DO YOUR "TOP PERFORMERS" PRODUCE?</h2>
-                        </div>
-                        <div style='position: relative;'>
-                            <div class='sliderWidgetBox'>
-                                <slider floor='0' ceiling='100' step='1' precision='0' stickiness='0' ng-model='percent_top_rev' ng-mouseup='updateSliders()'></slider>
-                                <div><span class='sliderScales dkGrayText floatLeft'>0%</span><span class='sliderScales dkGrayText floatRight'>100%</span>
-                                </div>
-                            </div>
-                            <div class='sliderNumberBox'>
-                                <input class='sliderField mdGrayText' ng-model="percent_top_rev" type="number" ng-mouseenter="percent_top_rev_hovered = true" ng-mouseleave="percent_top_rev_hovered = false" ng-focus="percent_top_rev_focused = true" ng-blur="percent_top_rev_focused = false" />
-                                <div class='percentField mdGrayText' ng-class='{hidden: percent_top_rev_focused || percent_top_rev_hovered}'>%</div>
+                    
+                    <div class='accessBox' style='margin-top: 40px; margin-bottom: 50px;'>
+                        <h2 class='dkGrayText sliderTitle'>WHAT PERCENTAGE OF YOUR TOP-LINE REVENUE DO YOUR "TOP PERFORMERS" PRODUCE? <span class="dkBlueText" style="font-weight:900;">{{percent_top_rev}}%</span></h2>
+                        <div style='margin-right: 10px; margin-top: 10px;'>
+                            <slider floor=0 ceiling=100 step=1 precision=0 stickiness=0 ng-model='percent_top_rev' ng-mouseup='updateSliders()'></slider>
+                            <div><span class='sliderScales dkGrayText floatLeft'>0%</span><span class='sliderScales dkGrayText floatRight'>100%</span>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
-                <div class='hPadding ltGrayFill' style='padding-top: 15px; padding-bottom: 15px;'>
+                <div class='hPadding ltGrayFill' style='padding-top: 35px; padding-bottom: 15px;'>
                     <h2 class='dkGrayText' style='margin-top:0px;'>
                         <a style='float:left; margin-top: 20px; margin-bottom: 10px;' href='http://shorecominc.com/'>
                             <img style="border: none;" src="data:image/png;base64,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" />
@@ -572,7 +557,7 @@
                     <div class='dkGrayText' style='float: left; font-size: 24px; margin-top: 0px; margin-left: 6px;'>THE AVENTION ADVANTAGE</div>
                 </div>
                 <div class='vPadding hPadding shadowed' style='background-color: #55565A; color: white; position: relative; z-index: 15;'>
-                    <h2>Based on the results of the Blossom "Big Data Impact on Sales" model, we estimate by using Avention you can increase your top-line annual revenue by:</h2>
+                    <h2>Based on the results of John Blossom's "Big Data Impact on Sales" model, we estimate by using Avention you can increase your top-line annual revenue by:</h2>
                     <h1 id='revBump'><span id='revBumpTxt'></span><span id='revBumpTst'></span></h1>
                 </div>
                 <div class='vPadding hPadding ltGrayFill dkBlueText shadowed' style='position: relative; z-index: 10;'>
@@ -580,9 +565,6 @@
                 </div>
                 <div class='hPadding ltGrayFill'>
                     <form id="mktoForm_1122"></form>
-                </div>
-                <div class='hPadding ltGrayFill' style='margin-top: 0px;'>
-                    <h2 style='text-align: center; margin-top: 0px;'>all fields are required</h2>
                 </div>
                 <input ng-click='submitForm()' class='avtnButton orangeFill ltGrayText circleArrow' value="CONTINUE TO RESULTS" />
             </div>
@@ -603,21 +585,21 @@
                         <div class='resultTitle'>
                             <h2 class='dkGrayText'>GROSS REVENUE GAINS WITH AVENTION</h2>
                         </div>
-                        <div class='resultField dkGrayText'><b class='sup'>+</b>{{firstYearGains | nfcurrency}}</div>
+                        <div class='resultField dkGrayText'>{{firstYearGains | nfcurrency}}</div>
                     </div>
 
                     <div style='position: relative; height:48px'>
                         <div class='resultTitle'>
                             <h2 class='dkGrayText'>FIRST YEAR REVENUE INCREASE WITH AVENTION</h2>
                         </div>
-                        <div class='resultField dkGrayText'><b class='sup'>+</b>{{finalGain}}%</div>
+                        <div class='resultField dkGrayText'>{{finalGain}}%</div>
                     </div>
 
                     <div style='position: relative; height:48px'>
                         <div class='resultTitle'>
                             <h2 class='dkGrayText'>FIRST YEAR AVENTION<br/>RETURN ON INVESTMENT</h2>
                         </div>
-                        <div class='resultField dkGrayText'><b class='sup'>+</b>{{finalROI}}&#x00D7;</div>
+                        <div class='resultField dkGrayText'>{{finalROI}}&#x00D7;</div>
                     </div>
 
                 </div>
@@ -625,15 +607,15 @@
                     <h1 class='dkBlueText'>REVENUE INCREASE BREAKDOWN</h1>
                     <div style='position: relative; height:32px'>
                         <div class='resultDetailTitle'>
-                            <h2 class='mdGrayText'>+ FROM TOP PERFORMERS</h2>
+                            <h2 class='mdGrayText'>FROM TOP PERFORMERS</h2>
                         </div>
-                        <div class='resultDetailField dkGrayText'><b class='supDetails'>+</b>{{fromTopPerformers | nfcurrency}}</div>
+                        <div class='resultDetailField dkGrayText'>{{fromTopPerformers | nfcurrency}}</div>
                     </div>
                     <div style='position: relative; height:32px'>
                         <div class='resultDetailTitle'>
-                            <h2 class='mdGrayText'>+ FROM REGULAR PERFORMERS</h2>
+                            <h2 class='mdGrayText'>FROM REGULAR PERFORMERS</h2>
                         </div>
-                        <div class='resultDetailField dkGrayText'><b class='supDetails'>+</b>{{fromRegPerformers | nfcurrency }}</div>
+                        <div class='resultDetailField dkGrayText'>{{fromRegPerformers | nfcurrency }}</div>
                     </div>
                     <h1 class='dkBlueText'>AVENTION ACCESS</h1>
                     <div class='accessBox'>
@@ -654,9 +636,9 @@
                     </div>
                     <div style='position: relative; height:48px'>
                         <div class='resultDetailTitle'>
-                            <h2 class='mdGrayText'>+ ESTIMATED COST OF AVENTION<span class='asterisk'>*</span></h2>
+                            <h2 class='mdGrayText'>ESTIMATED COST OF AVENTION<span class='asterisk'>*</span></h2>
                         </div>
-                        <div class='resultDetailField dkGrayText'><b class='supDetails'>+</b>{{costOfAVTN | nfcurrency}}</div>
+                        <div class='resultDetailField dkGrayText'>{{costOfAVTN | nfcurrency}}</div>
                     </div>
                 </div>
                 <div class='vPadding hPadding' style='z-index: 0; position: relative; width:360px;'>
@@ -695,7 +677,187 @@
             return out;
         }
 
-        angular.module('ExampleApp', ['vr.directives.slider', 'ngAnimate'])
+ angular.module('ngPatternRestrict', [])
+	.value('ngPatternRestrictConfig', {
+		showDebugInfo: true,
+	})
+	.directive('ngPatternRestrict', ['ngPatternRestrictConfig', function(patternRestrictConfig) {
+		function showDebugInfo(message) {
+			if (patternRestrictConfig.showDebugInfo) {
+				console.log("[ngPatternRestrict] " + message);
+			}
+		};
+
+		return {
+			restrict: 'A',
+			require: "?ngModel",
+			compile: function uiPatternRestrictCompile() {
+				var options = patternRestrictConfig;
+				showDebugInfo("Loaded");
+
+				return function ngPatternRestrictLinking(scope, iElement, iAttrs, ngModelController) {
+					var originalPattern;
+					var eventsBound = false; // have we bound our events yet?
+					var regex; // validation regex object
+					var oldValue; // keeping track of the previous value of the element
+					var initialized = false; // have we initialized our directive yet?
+					var caretPosition; // keeping track of where the caret is at to avoid jumpiness
+
+					//-------------------------------------------------------------------
+					// initialization
+					function initialize() {
+						if (initialized) return;
+						showDebugInfo("Initializing");
+
+						readPattern();
+
+						oldValue = iElement.val();
+						if (!oldValue) oldValue = "";
+						showDebugInfo("Original value: " + oldValue);
+
+						bindListeners();
+
+						initialized = true;
+					};
+
+					function readPattern() {
+						originalPattern = iAttrs.pattern;
+						showDebugInfo("Original pattern: " + originalPattern);
+						
+						//TEST should default to ngPatternRestrict, but if not present should check for pattern
+						var entryRegex = !!iAttrs.ngPatternRestrict ? iAttrs.ngPatternRestrict : originalPattern;
+						showDebugInfo("RegEx to use: " + entryRegex);
+						tryParseRegex(entryRegex);
+					};
+
+					function uninitialize() {
+						showDebugInfo("Uninitializing");
+						unbindListeners();
+					};
+
+					//-------------------------------------------------------------------
+					// setup events
+					function bindListeners() {
+						if (eventsBound) return;
+
+			            iElement.bind('input keyup click', genericEventHandler);
+
+			            showDebugInfo("Bound events: input, keyup, click");
+					};
+
+					function unbindListeners() {
+						if (!eventsBound) return;
+
+			            iElement.unbind('input', genericEventHandler);
+						//input: HTML5 spec, changes in content
+
+			            iElement.unbind('keyup', genericEventHandler);
+			            //keyup: DOM L3 spec, key released (possibly changing content)
+
+			            iElement.unbind('click', genericEventHandler);
+			            //click: DOM L3 spec, mouse clicked and released (possibly changing content)
+
+			            showDebugInfo("Unbound events: input, keyup, click");
+
+			            eventsBound = false;
+					};
+
+					//-------------------------------------------------------------------
+					// setup based on attributes
+					function tryParseRegex(regexString) {
+						try {
+							regex = new RegExp(regexString);
+						} catch (e) {
+							throw "Invalid RegEx string parsed for ngPatternRestrict: " + regexString;
+						}
+					};
+
+					//-------------------------------------------------------------------
+					// event handlers
+					function genericEventHandler(evt) {
+						showDebugInfo("Reacting to event: " + evt.type);
+						var newValue = iElement.val();
+
+						//HACK Chrome returns an empty string as value if user inputs a non-numeric string into a number type input
+						// with this happening, we cannot rely on the value to validate the regex, we need to assume this to be wrong
+						var inputValidity = iElement.prop("validity");
+                        // var regex = new RegExp('^[0-9]+$');
+                        var isGoodValue = regex.test(newValue);
+						if (newValue === "" && iElement.attr("type") === "number" && inputValidity && inputValidity.badInput) {
+							showDebugInfo("Value cannot be verified. Should be invalid. Reverting back to: '" + oldValue + "'");
+							evt.preventDefault();
+							revertToPreviousValue();
+						} else if ( isGoodValue ) {
+							showDebugInfo("New value passed validation against " + regex + ": '" + newValue + "'");
+							updateCurrentValue(newValue);
+						} else {
+							showDebugInfo("New value did NOT pass validation against " + regex + ": '" + newValue + "', reverting back to: '" + oldValue + "'");
+							evt.preventDefault();
+							revertToPreviousValue();
+						}
+					};
+
+					function revertToPreviousValue() {
+						if (ngModelController) {
+							scope.$apply(function() {							
+								ngModelController.$setViewValue(oldValue);
+							});
+						}
+						iElement.val(oldValue);
+
+						if (!angular.isUndefined(caretPosition))
+							setCaretPosition(caretPosition);
+					};
+
+					function updateCurrentValue(newValue) {
+						oldValue = newValue;
+						caretPosition = getCaretPosition();
+					};
+
+					//-------------------------------------------------------------------
+					// caret position
+
+					// logic from http://stackoverflow.com/a/9370239/147507
+					function getCaretPosition() {
+						var input = iElement[0]; // we need to go under jqlite
+
+						// IE support
+						if (document.selection) {
+							var range = document.selection.createRange();
+							range.moveStart('character', -iElement.val().length);
+							return range.text.length;
+						} else {
+							return input.selectionStart;
+						}
+					}
+
+					// logic from http://stackoverflow.com/q/5755826/147507
+					function setCaretPosition(position) {
+						var input = iElement[0]; // we need to go under jqlite
+						if (input.createTextRange) {
+					        var textRange = input.createTextRange();
+					        textRange.collapse(true);
+					        textRange.moveEnd('character', position);
+					        textRange.moveStart('character', position);
+					        textRange.select();	
+    					} else {
+							input.setSelectionRange(position, position);
+						}
+					}
+
+					iAttrs.$observe("ngPatternRestrict", readPattern);
+					iAttrs.$observe("pattern", readPattern);
+
+					scope.$on("$destroy", uninitialize);
+
+					initialize();
+				};
+			}
+		};
+	}]);       
+        
+        
+        angular.module('ExampleApp', ['vr.directives.slider', 'ngAnimate', 'ngPatternRestrict'])
             .controller('ROICtrl', ['$scope', '$filter',
                 function ($scope, $filter) {
                     $scope.topRepFactor = 4;
@@ -919,7 +1081,9 @@
 
                         // How much rev does each individual bring in?
                         rev_per_top_rep = total_top_rev / $scope.num_top_reps;
+                        rev_per_top_rep = ( ( isNaN(rev_per_top_rep) ) ? 0 : rev_per_top_rep);
                         rev_per_reg_rep = total_reg_rev / $scope.num_reg_reps;
+                        rev_per_reg_rep = ( ( isNaN(rev_per_reg_rep) ) ? 0 : rev_per_reg_rep);
 
                         // How many of each rep type will get AVTN?
                         num_top_w_AVTN = Math.round($scope.num_top_reps * ($scope.access_top_reps / 100));
@@ -964,9 +1128,24 @@
                     $scope.showStats = true;
                     $scope.showForm = true;
                     $scope.showResults = true;
+                    
                     $scope.updateSliders = function () {
                         // this works around a bug in the angular-slider directive
                     };
+                    
+                    $scope.validateNumber = function (event) {
+                        var key = window.event ? event.keyCode : event.which;
+
+                        if (event.keyCode == 8 || event.keyCode == 46
+                        || event.keyCode == 37 || event.keyCode == 39) {
+                            return true;
+                        }
+                        else if ( key < 48 || key > 57 ) {
+                            return false;
+                        }
+                        else return true;
+                    };
+        
 
                     $scope.gotoForm = function () {
                         $scope.showStats = false;
